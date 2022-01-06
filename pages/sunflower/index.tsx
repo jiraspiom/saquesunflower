@@ -93,10 +93,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     
     console.log(context)
 
-    const colher = 4.48
-    //const colher = 0.88
+    // const colher = 4.48
+    const colher = 0.88
     // const colher = 27.2
-    const taxaMtic = 0.20
+    const taxaMtic = 0.24
 
     const urlMatic = 'https://api.coingecko.com/api/v3/coins/wmatic'
     const urlSff = 'https://api.coingecko.com/api/v3/coins/sunflower-farm'

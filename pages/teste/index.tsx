@@ -1,40 +1,50 @@
-import type { NextPage } from 'next'
-import { FormEvent, useState } from 'react'
+import * as React from 'react'
+import { InferGetStaticPropsType } from 'next'
+import AddPost from '../../components/AddPost'
+import Post from '../../components/Post'
+import { IPost } from '../types'
 
-const Home: NextPage = () => {
+const API_URL: string = 'https://jsonplaceholder.typicode.com/posts'
 
-  const [colheita, setColheita] = useState('')
-  const [taxa, setTaxa] = useState('')
+export default function IndexPage({posts,}: InferGetStaticPropsType<typeof getStaticProps>) {
+  const [postList, setPostList] = React.useState(posts)
 
-  console.log(colheita, taxa)
-
-  function gravar(event: FormEvent){
-    event.preventDefault()
-
-    const dados = {
-      colheita,
-      taxa
+  const addPost = async (e: React.FormEvent, formData: IPost) => {
+    e.preventDefault()
+    const post: IPost = {
+      id: Math.random(),
+      title: formData.title,
+      body: formData.body,
     }
-
-    console.log('registro gravado:', dados)
-
-    console.log(db)
-
+    setPostList([post, ...postList])
   }
 
+  const deletePost = async (id: number) => {
+    const posts: IPost[] = postList.filter((post: IPost) => post.id !== id)
+    console.log(posts)
+    setPostList(posts)
+  }
+
+  if (!postList) return <h1>Loading...</h1>
+
   return (
-    <div>
-      
-      <form onSubmit={gravar}>
-        <input type="text" name="colheita" id="colheita"  placeholder='ex: 0.88' onChange={event => setColheita(event.target.value)}/>
-        <input type="text" name="taxa" id="taxa" placeholder='ex 0.29' onChange={event => setTaxa(event.target.value)}/>
-
-        <button type="submit">Salvar</button>
-
-      </form>
-
-    </div>
+    <main className='container'>
+      <h1>My posts</h1>
+      <AddPost savePost={addPost} />
+      {postList.map((post: IPost) => (
+        <Post key={post.id} deletePost={deletePost} post={post} />
+      ))}
+    </main>
   )
 }
 
-export default Home
+export async function getStaticProps() {
+  const res = await fetch(API_URL)
+  const posts: IPost[] = await res.json()
+
+  return {
+    props: {
+      posts,
+    },
+  }
+}

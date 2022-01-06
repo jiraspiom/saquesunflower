@@ -87,16 +87,16 @@ const Bomb: NextPage<Props> = (props: any) => {
 export default Bomb
 
 //export async function getStaticProps() {
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
     //'https://claim.bombcrypto.io/claim-orders?limit=100&offset=0&walletAddress=0xF2DBC330ad5c7d3c8389fCF8DaFF19dccD461Dd3'
     const bomb = 'https://claim.bombcrypto.io/claim-orders?limit=100&offset=0'
     
     console.log(context)
 
-    //const colher = 4.48
-    const colher = 0.88
+    const colher = 4.48
+    //const colher = 0.88
     // const colher = 27.2
-    const taxaMtic = 0.25 
+    const taxaMtic = 0.20
 
     const urlMatic = 'https://api.coingecko.com/api/v3/coins/wmatic'
     const urlSff = 'https://api.coingecko.com/api/v3/coins/sunflower-farm'

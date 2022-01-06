@@ -1,7 +1,12 @@
 import type { NextPage } from 'next'
 import { FormEvent, useState } from 'react'
+import {IFarm} from '../types'
 
-const Bomb: NextPage = (props: props) => {
+type Props = {
+  savePost: (e: React.FormEvent, formData: IFarm) => void
+}
+
+const Bomb: NextPage = ({props,}: InferGetStaticPropsType<typeof getStaticProps>) => {
 
   const [colheita, setColheita] = useState('')
   const [taxa, setTaxa] = useState('')
@@ -84,7 +89,8 @@ export async function getStaticProps() {
     
     const colher = 4.48
     //const colher = 0.88
-    const taxaMtic = 0.29
+    // const colher = 27.2
+    const taxaMtic = 0.195393416 
 
     const urlMatic = 'https://api.coingecko.com/api/v3/coins/wmatic'
     const urlSff = 'https://api.coingecko.com/api/v3/coins/sunflower-farm'

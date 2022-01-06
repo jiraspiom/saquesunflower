@@ -1,21 +1,33 @@
 import type { NextPage } from 'next'
 import { FormEvent, useState } from 'react'
-import {IFarm} from '../types'
+import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next'
 
-type Props = {
-  savePost: (e: React.FormEvent, formData: IFarm) => void
+interface Props {
+  props: {
+    final: {
+      A: string;
+      B: string;
+      C: string;
+      D: string;
+      E: string;
+      F: string;
+      G: string;
+      H: string;
+      I: string;
+    }
+  }
 }
 
-const Bomb: NextPage = ({props,}: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Bomb: NextPage<Props> = (props: any) => {
 
   const [colheita, setColheita] = useState('')
   const [taxa, setTaxa] = useState('')
-
-  console.log(colheita, taxa)
+  //
+  //console.log(props)
 
   async function gravar(event: FormEvent){
     event.preventDefault()
-
+    console.log('passou aqui')
     const dados = {
       colheita,
       taxa
@@ -26,11 +38,11 @@ const Bomb: NextPage = ({props,}: InferGetStaticPropsType<typeof getStaticProps>
   }
 
   return (
-      <div >
+    <div >
 
-        <div>
+      <div>
       
-        {/* <form onSubmit={consultar}>
+        {/* <form onSubmit={gravar}>
           <input type="text" name="colheita" id="colheita"  placeholder='ex: 0.88' onChange={event => setColheita(event.target.value)}/>
           <input type="text" name="taxa" id="taxa" placeholder='ex 0.29' onChange={event => setTaxa(event.target.value)}/>
 
@@ -38,59 +50,53 @@ const Bomb: NextPage = ({props,}: InferGetStaticPropsType<typeof getStaticProps>
 
         </form> */}
 
+        <div>
+          {props.final.A}
+        </div>
+        <div>
+          {props.final.B}
+        </div>
+        <div>
+          {props.final.C}
+        </div>
+        <div>
+          {props.final.D}
+        </div>
+        <div>
+          {props.final.E}
+        </div>
+        <div>
+          {props.final.F}
+        </div>
+        <div>
+          {props.final.G}
+        </div>
+        <div>
+          {props.final.H}
+        </div>
+        <div>
+          {props.final.I}
+        </div>
+
       </div>
-
-
-        <div>
-          <h1> {props.final.A } </h1>
-        </div>
-        
-        <div>
-          {props.final.B }
-        </div>
-
-         <div>
-          {props.final.C }
-        </div>
-
-        <div>
-          {props.final.D }
-        </div> 
-
-        <div>
-          {props.final.E }
-        </div>
-        
-        <div>
-          {props.final.F }
-        </div>
-
-        <div>
-          {props.final.G }
-        </div>
-        
-        <div>
-          {props.final.H }
-        </div>
-
-        <div>
-          {props.final.I }
-        </div>
           
-      </div>
-    )
+    </div>
+  )
 }
 
 export default Bomb
 
-export async function getStaticProps() {
+//export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async (context) => {
     //'https://claim.bombcrypto.io/claim-orders?limit=100&offset=0&walletAddress=0xF2DBC330ad5c7d3c8389fCF8DaFF19dccD461Dd3'
     const bomb = 'https://claim.bombcrypto.io/claim-orders?limit=100&offset=0'
     
-    const colher = 4.48
-    //const colher = 0.88
+    console.log(context)
+
+    //const colher = 4.48
+    const colher = 0.88
     // const colher = 27.2
-    const taxaMtic = 0.195393416 
+    const taxaMtic = 0.25 
 
     const urlMatic = 'https://api.coingecko.com/api/v3/coins/wmatic'
     const urlSff = 'https://api.coingecko.com/api/v3/coins/sunflower-farm'
@@ -105,9 +111,9 @@ export async function getStaticProps() {
     const maticBrl = dados_matic.market_data.current_price.brl
     const maticUsd = dados_matic.market_data.current_price.usd
 
-    console.log(dados_matic.id)
-    console.log(maticBrl)
-    console.log(maticUsd)
+    // console.log(dados_matic.id)
+    // console.log(maticBrl)
+    // console.log(maticUsd)
     
     const taxabrl = taxaMtic * maticBrl
     const taxausd = taxaMtic * maticUsd

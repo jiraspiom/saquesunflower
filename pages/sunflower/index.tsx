@@ -1,142 +1,146 @@
 import type { NextPage } from 'next'
+import Image from 'next/image'
+import React from 'react'
 import { FormEvent, useState } from 'react'
-import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next'
+import { iDados } from '../../types/iDados'
 
-interface Props {
-  props: {
-    final: {
-      A: string;
-      B: string;
-      C: string;
-      D: string;
-      E: string;
-      F: string;
-      G: string;
-      H: string;
-      I: string;
-    }
-  }
-}
+const Bomb = () => {
 
-const Bomb: NextPage<Props> = (props: any) => {
+    const [taxa, setTaxa] = useState('')
+    //const [campo, setCampo] = useState('')
 
-  const [colheita, setColheita] = useState('')
-  const [taxa, setTaxa] = useState('')
-  //
-  //console.log(props)
+    const[A, setA] = useState('')
+    const[B, setB] = useState('')
+    const[C, setC] = useState('')
+    const[D, setD] = useState('')
+    const[E, setE] = useState('')
+    const[F, setF] = useState('')
+    const[G, setG] = useState('')
+    const[H, setH] = useState('')
+    const[I, setI] = useState('')
 
-  async function gravar(event: FormEvent){
-    event.preventDefault()
-    console.log('passou aqui')
-    const dados = {
-      colheita,
-      taxa
+
+    const onSubmit = (e: FormEvent) =>{
+        e.preventDefault();
+        // setCampo(taxa)
     }
 
-    console.log('registro gravado:', dados)
+    const colveFlor = async () => {
+        console.log("clicou na colveflor")
+        // setCampo(taxa)
 
-  }
+        var oi = await calcular(Number(taxa))
+        setA(oi.A)
+        setB(oi.B)
+        setC(oi.C)
+        setD(oi.D)
+        setE(oi.E)
+        setF(oi.F)
+        setG(oi.G)
+        setH(oi.H)
+        setI(oi.I)
 
-  return (
-    <div >
+    }
 
-      <div>
-      
-        {/* <form onSubmit={gravar}>
-          <input type="text" name="colheita" id="colheita"  placeholder='ex: 0.88' onChange={event => setColheita(event.target.value)}/>
-          <input type="text" name="taxa" id="taxa" placeholder='ex 0.29' onChange={event => setTaxa(event.target.value)}/>
+    return (
+        <div>
+            <div>
+                <label htmlFor="taxa">Valor da taxa em Matic: </label>
+                <input type="number" name="taxa" id="taxa" placeholder="ex. 0,210" 
+                    step="0.001" min="0" max="1"
+                    onChange={(e) => {setTaxa(e.target.value) }}
+                />     
+            </div>
+            <div>
+                <Image onClick={colveFlor}
+                src="/couveFlor.png"
+                alt="colveFlor"
+                width={44}
+                height={44}
+                quality={100}
+                />
+            </div>
+            <div>
+                <div>
+                    <h1>
+                        Clique na colveflor para visualiar o resultado
 
-          <button type="submit">Consultar</button>
-
-        </form> */}
-
-        <div>
-          {props.final.A}
-        </div>
-        <div>
-          {props.final.B}
-        </div>
-        <div>
-          {props.final.C}
-        </div>
-        <div>
-          {props.final.D}
-        </div>
-        <div>
-          {props.final.E}
-        </div>
-        <div>
-          {props.final.F}
-        </div>
-        <div>
-          {props.final.G}
-        </div>
-        <div>
-          {props.final.H}
-        </div>
-        <div>
-          {props.final.I}
+                    </h1>
+                </div>
+               
+                <div>{A}</div>    
+                <div>{B}</div>
+                <div>{C}</div>
+                <div>{D}</div>
+                <div>{E}</div>
+                <div>{F}</div>
+                <div>{G}</div>
+                <div>{H}</div>
+                <div>{I}</div>
+            </div>
         </div>
 
-      </div>
-          
-    </div>
-  )
+    )
 }
 
-export default Bomb
+const buscarValoresApiCoinGecko = async () =>{
+    const url_Matic = 'https://api.coingecko.com/api/v3/coins/wmatic'
+    const url_Sff = 'https://api.coingecko.com/api/v3/coins/sunflower-farm'
 
-//export async function getStaticProps() {
-export const getServerSideProps: GetServerSideProps = async (context) => {
-    //'https://claim.bombcrypto.io/claim-orders?limit=100&offset=0&walletAddress=0xF2DBC330ad5c7d3c8389fCF8DaFF19dccD461Dd3'
-    const bomb = 'https://claim.bombcrypto.io/claim-orders?limit=100&offset=0'
+    const resMatic = await fetch(url_Matic)
+    const dadosMatic = await resMatic.json()
+
+    const resSff = await fetch(url_Sff)
+    const dadosSff = await resSff.json()
+
+    const maticBrl = dadosMatic.market_data.current_price.brl
+    const maticUsd = dadosMatic.market_data.current_price.usd
+
+    const sunflower = dadosSff.id
+    const sffBrl = dadosSff.market_data.current_price.brl
+    const sffUsd = dadosSff.market_data.current_price.usd
+
+    const Dados : iDados = {
+        moeda: sunflower,
+        maticBrl: maticBrl,
+        maticUsd: maticUsd,
+        sffBrl: sffBrl,
+        sffUsd: sffUsd,
+      }
+
+    return Dados
+}
+
+const calcular = async (taxa: number) =>{
+    var dados: iDados = await buscarValoresApiCoinGecko()
+    var taxaMtic = 0
+
+    if (taxa){
+        taxaMtic = taxa
+    }else{
+        taxaMtic = 0.29
+    }
+    var taxaMtic = taxa
+    var colher = 0.88
+
+    const taxabrl = taxaMtic * dados.maticBrl
+    const taxausd = taxaMtic * dados.maticUsd
+
+    const sff_colheirtaBrl = dados.sffBrl * colher
+    const sff_colheirtaUsd = dados.sffUsd * colher
     
-    console.log(context)
-
-    // const colher = 4.48
-    const colher = 0.88
-    // const colher = 27.2
-    const taxaMtic = 0.24
-
-    const urlMatic = 'https://api.coingecko.com/api/v3/coins/wmatic'
-    const urlSff = 'https://api.coingecko.com/api/v3/coins/sunflower-farm'
-
-    const resMatic = await fetch(urlMatic)
-    const dados_matic = await resMatic.json()
-
-    const resSff = await fetch(urlSff)
-    const dados_sff = await resSff.json()
-
-
-    const maticBrl = dados_matic.market_data.current_price.brl
-    const maticUsd = dados_matic.market_data.current_price.usd
-
-    // console.log(dados_matic.id)
-    // console.log(maticBrl)
-    // console.log(maticUsd)
-    
-    const taxabrl = taxaMtic * maticBrl
-    const taxausd = taxaMtic * maticUsd
-
-    const sunflower = dados_sff.id
-    const sffBrl = dados_sff.market_data.current_price.brl
-    const sffUsd = dados_sff.market_data.current_price.usd
-
-    const sff_colheirtaBrl = sffBrl * colher
-    const sff_colheirtaUsd = sffUsd * colher
-    
-    const saqueBrl = sffBrl * colher 
-    const saqueUsd = sffUsd * colher
+    const saqueBrl = dados.sffBrl * colher 
+    const saqueUsd = dados.sffUsd * colher
 
     const valorReal = saqueBrl - taxabrl
     const valorUSD = saqueUsd - taxausd
-    
-    
-    const A = sunflower
-    const B = `1 ${sunflower} em real: R$ ${sffBrl}`
-    const C = `1 ${sunflower} em dolar: $ ${sffUsd} `
-    const D = `colher ${colher} ${sunflower}: R$ ${sff_colheirtaBrl}`
-    const E = `colher ${colher} ${sunflower}:  $ ${sff_colheirtaUsd}`
+
+
+    const A = dados.moeda
+    const B = `1 ${dados.moeda} em real: R$ ${dados.sffBrl}`
+    const C = `1 ${dados.moeda} em dolar: $ ${dados.sffUsd} `
+    const D = `colher ${colher} ${dados.moeda}: R$ ${sff_colheirtaBrl}`
+    const E = `colher ${colher} ${dados.moeda}:  $ ${sff_colheirtaUsd}`
     
     const F = `taxa de ${taxaMtic} matic para salvar em Real: R$ ${taxabrl}`
     const G =`taxa de ${taxaMtic} matic para salvar em Dolar: $ ${taxausd}`
@@ -156,25 +160,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       I: I
     }
 
-    const Dados = {
-      moeda: sunflower,
-      sff_1_Brl: sffBrl,
-      sff_1_Usd: sffUsd,
-      colheita: colher,
-      saqueBrl: saqueBrl,
-      saqueUsd: saqueUsd,
-      taxaMtic: taxaMtic,
-      taxabrl: taxabrl,
-      taxausd: taxausd,
-      valorReal: valorReal,
-      valorUSD: valorUSD
-    }
+    //console.log(final)
+    return final
+}
 
-    return {
-      props: {
-      dados_matic,
-      dados_sff,
-      final
-      },
-    }
-  }
+export default Bomb

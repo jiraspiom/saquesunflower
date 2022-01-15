@@ -129,26 +129,27 @@ const updateSimulator = (heroi: IHeroi) => {
   //var heroObj = heroList[index];
   // var heroObj = heroList[0];
   var heroObj = {
-    skin: skin,
-    customName: customName,
-    rarity: rarity,
-    power: power,
-    speed: speed,
-    stamina: stamina,
-    bombnum: bombnum,
-    bombrange: bombrange,
-    energy: energy,
-    mana: mana,
-    timeToRecover: timeToRecover,
+    id: hero,
+    skin,
+    customName,
+    rarity,
+    power,
+    speed,
+    stamina,
+    bombnum,
+    bombrange,
+    energy,
+    mana,
+    timeToRecover,
     hitsWood: Math.floor(hitsWood),
     hitsMetal: Math.floor(hitsMetal),
     hitsGold: Math.floor(hitsGold),
     hitsCrystal: Math.floor(hitsCrystal),
     hitsTreasure: Math.floor(hitsTreasure),
-    totalProfit: totalProfit,
-    maxProfit: maxProfit,
-    minProfit: minProfit,
-    avgProfit: avgProfit,
+    totalProfit,
+    maxProfit,
+    minProfit,
+    avgProfit
   };
 
   return heroObj;

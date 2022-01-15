@@ -1,0 +1,23 @@
+export interface IHeroiOB{
+    id: number,
+    skin: string,
+    customName: string,
+    rarity: string,
+    power: number,
+    speed: number,
+    stamina: number,
+    bombnum: number,
+    bombrange: number,
+    energy: number,
+    mana: number,
+    timeToRecover: number,
+    hitsWood: number,
+    hitsMetal: number,
+    hitsGold: number,
+    hitsCrystal: number,
+    hitsTreasure: number,
+    totalProfit: number,
+    maxProfit: number,
+    minProfit: number,
+    avgProfit: number
+}

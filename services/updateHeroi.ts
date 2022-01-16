@@ -157,10 +157,10 @@ const updateSimulator = (heroi: IHeroi) => {
     hitsGold: Math.floor(hitsGold),
     hitsCrystal: Math.floor(hitsCrystal),
     hitsTreasure: Math.floor(hitsTreasure),
-    totalProfit,
-    maxProfit,
-    minProfit,
-    avgProfit
+    totalProfit: parseFloat(totalProfit.toFixed(3)),
+    maxProfit: parseFloat(maxProfit.toFixed(3)),
+    minProfit: parseFloat(minProfit.toFixed(3)),
+    avgProfit: parseFloat(avgProfit.toFixed(3))
   };
 
   return heroObj;

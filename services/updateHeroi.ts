@@ -44,9 +44,13 @@ const skinsImageList = [
   { id: 3, name: "cowboy" },
   { id: 4, name: "vampire" },
   { id: 5, name: "witch" },
-  { id: 6, name: "???" },
+  { id: 6, name: "dog" },
   { id: 7, name: "flogMeme" },
   { id: 8, name: "ninja" },
+  { id: 9, name: "??9??" },
+  { id: 10, name: "??10??" },
+  { id: 11, name: "??11??"},
+
 ];
 
 function getEnergy(array: any) {

@@ -73,8 +73,10 @@ const updateSimulator = (heroi: IHeroi) => {
   // get vars together
   var hero = heroi.id;
   var customName = heroi.id;
+  var level = heroi.level;
   var rarity = heroi.rarity;
   var skin = skinsImageList.find((x) => x.id === heroi.skin)?.name;
+  var color = heroi.color;
   var power = heroi.bombPower;
   var speed = heroi.speed;
   var stamina = heroi.stamina;
@@ -90,6 +92,9 @@ const updateSimulator = (heroi: IHeroi) => {
   } else {
     timeToRecover = stamina * 100;
   }
+
+  //adicionado o pwer calculado
+  power = power + level - 1
 
   // Lets calculate how many hits it needs for every chest
   var hitsWood = chestWoodHp / power;
@@ -135,7 +140,9 @@ const updateSimulator = (heroi: IHeroi) => {
   var heroObj = {
     id: hero,
     skin,
+    color,
     customName,
+    level,
     rarity,
     power,
     speed,

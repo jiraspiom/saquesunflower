@@ -98,7 +98,7 @@ const Bomb = () => {
                                     <Image src="/bomb.png" alt="bomb" width={32} height={32} quality={100} /> Bomb num: {item.bombnum}
                                 </div>
                                 <div>
-                                    <Image src="/range.png" alt="range" width={32} height={32} quality={100} /> Pombo range: {item.bombrange}
+                                    <Image src="/range.png" alt="range" width={32} height={32} quality={100} /> Bomb range: {item.bombrange}
                                 </div>
                             </div>
                             ---------------------------------

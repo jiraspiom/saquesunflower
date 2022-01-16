@@ -78,14 +78,27 @@ const Bomb = () => {
                 </div>
                 <div className={styles.grid}>
                     {heroi?.map((item: IHeroiOB) =>
+                    
                         <div key={item.id} className={styles.card}>
-                            <div>{item.id} </div>
-                            <div>{item.rarity} - level: {item.level}</div>
-
-                            <div>{item.skin}</div>
+                            <table>
+                            <tr>
+                                <td><Image src={item.skin} alt={item.skin} width={64} height={64} quality={100} /> </td>
+                                <td>
+                                    <div>
+                                        id: {item.id}
+                                    </div>
+                                    <div>
+                                        rarity: {item.rarity}
+                                    </div>
+                                    <div>
+                                        level: {item.level} 
+                                    </div>
+                                </td>
+                            </tr>
+                            </table>
 
                             <div>
-                                <div>
+                                <div className={styles.tela}>
                                     <Image src="/power.png" alt="power" width={32} height={32} quality={100} /> Power: {item.power}
                                 </div>
                                 <div>
@@ -101,7 +114,7 @@ const Bomb = () => {
                                     <Image src="/range.png" alt="range" width={32} height={32} quality={100} /> Bomb range: {item.bombrange}
                                 </div>
                             </div>
-                            ---------------------------------
+                            <hr/>
                             <div>Max profit: {item.maxProfit}</div>
                             <div>Min profit: {item.minProfit}</div>
                             <div>Avg profit: {item.avgProfit}</div>
@@ -127,11 +140,12 @@ const calcular = async (carteira: string) => {
     }
 
     var dados: Array<IHeroi> = await consultaApiHerois(carteira)
-    // console.log(dados)
+    //console.log(dados)
 
     const final = dados?.map((item: IHeroi) => {
         return updateSimulator(item)
     })
+
 
     for (const item of final) {
         max = max + item.maxProfit
@@ -147,7 +161,8 @@ const calcular = async (carteira: string) => {
         total: parseFloat(total.toFixed(2)),
         final: final
     }
-
+    console.log(calculado);
+    
     return calculado
 
 }

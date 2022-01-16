@@ -75,7 +75,7 @@ const updateSimulator = (heroi: IHeroi) => {
   var customName = heroi.id;
   var level = heroi.level;
   var rarity = heroi.rarity;
-  var skin = skinsImageList.find((x) => x.id === heroi.skin)?.name;
+  // var skin = skinsImageList.find((x) => x.id === heroi.skin)?.name;
   var color = heroi.color;
   var power = heroi.bombPower;
   var speed = heroi.speed;
@@ -84,6 +84,15 @@ const updateSimulator = (heroi: IHeroi) => {
   var bombrange = heroi.bombRange;
   var energy = getEnergy(heroi.abilities);
   var mana = getMana(heroi.abilities);
+  var skin = ''
+
+  if(heroi.skin == 6 || heroi.skin == 7 || heroi.skin == 8){
+    skin = `/skin_${heroi.skin}.png`
+  }else{
+    skin = `/skin_${heroi.skin + '_' + heroi.color}.png`
+  }
+
+  // var skin = `skin_${heroi.skin + heroi.color? '_' + heroi.color : ''}.png`
 
   // Lets calculate the time this hero needs to fully recover
   var timeToRecover;

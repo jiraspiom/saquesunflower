@@ -27,7 +27,8 @@ const Simulador: NextPage = () => {
   ]
 
   const metodo =  async () =>{
-    var dados = await consultaHeroi("0x9C4d27c7c5796B8e64D626c6015463CfE4568dBF")
+    // var dados = await consultaHeroi("0x9C4d27c7c5796B8e64D626c6015463CfE4568dBF")
+    var dados = await consultaHeroi("0xCE65910092fe6a9329aFC553a13Fe551001Cdf0d") // 4000 bcoin
     // var dados = await consultaHeroi("0x3CBfA79aaC3E8711d34Aad25e54032aA830f4de4")
     // var dados = await  consultaHeroi("0x64a63D24234b2Fd661682A9d5915838F632a99a5")
     return dados
@@ -38,7 +39,7 @@ const Simulador: NextPage = () => {
   var tess = metodo()
   tess.then((req)=>{
     //todo tirar comentario
-    //setA(req)
+    setA(req)
     console.log(req)
   }).catch(erro => console.log(erro))
 
@@ -49,7 +50,7 @@ const Simulador: NextPage = () => {
       <section>
         <ol>
           {A.map((ab: IHeroiOB) => {
-            return <li key={ab.id}> {ab.id} {ab.rarity} {ab.skin} - {ab.power} </li>
+            return <li key={ab.id}> {ab.id} {ab.rarity} {ab.skin} - {ab.power} - {ab.avgProfit} </li>
           })}
         </ol>
        

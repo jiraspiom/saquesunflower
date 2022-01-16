@@ -68,11 +68,24 @@ const Bomb = () => {
                                 <div>{item.rarity} - level: {item.level}</div>
 
                                 <div>{item.skin}</div>
-                                <div>Power: {item.power}</div>
-                                <div>Speed: {item.speed}</div>
-                                <div>Stamina: {item.stamina}</div>
-                                <div>Bomb num: {item.bombnum}</div>
-                                <div>Pombo range: {item.bombrange}</div>
+
+                                <div>
+                                    <div>
+                                        <Image src="/power.png" alt="power" width={32} height={32} quality={100}/> Power: {item.power}
+                                    </div>
+                                    <div>
+                                        <Image src="/speed.png" alt="speed" width={32} height={32} quality={100}/>  Speed: {item.speed}
+                                    </div>
+                                    <div>
+                                        <Image src="/stamina.png" alt="stamina" width={32} height={32} quality={100}/> Stamina: {item.stamina}
+                                    </div>
+                                    <div>
+                                        <Image src="/bomb.png" alt="bomb" width={32} height={32} quality={100}/> Bomb num: {item.bombnum}
+                                    </div>
+                                    <div>
+                                        <Image src="/range.png" alt="range" width={32} height={32} quality={100}/> Pombo range: {item.bombrange}
+                                    </div>
+                                </div>
                                 ---------------------------------
                                 <div>Max profit: {item.maxProfit}</div>
                                 <div>Min profit: {item.minProfit}</div>

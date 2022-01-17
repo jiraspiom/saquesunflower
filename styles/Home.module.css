@@ -122,6 +122,10 @@
   line-height: 75px;
   font-size: 30px;
 }
+.Comomm {
+  color: white;
+  background-color: red;
+}
 
 @media (max-width: 600px) {
   .grid {
@@ -129,3 +133,4 @@
     flex-direction: column;
   }
 }
+

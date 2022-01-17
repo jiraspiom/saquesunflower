@@ -2,6 +2,7 @@ export interface IHeroiOB{
     id: number,
     skin: string,
     color: number,
+    rarityCor: string,
     customName: string,
     level: number,
     rarity: string,

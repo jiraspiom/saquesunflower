@@ -1,3 +1,4 @@
+import { redirect } from "next/dist/server/api-utils";
 import { IHeroi } from "../types/iHeroi";
 
 // price vars
@@ -30,12 +31,12 @@ let fullStats: Array<any> = [];
 
 //const skinsImageList = ["cowboy", "witch", "vampire","knight", "frog","ninja", "flog2"];
 const rarityList = [
-  "common",
-  "rare",
-  "super rare",
-  "epic",
-  "legend",
-  "super legend",
+  {cor: 'rgb(215, 215, 215)', tipo:"Comomm"},
+  {cor: 'rgb(7, 255, 36)', tipo: "Rare"},
+  {cor: 'rgb(167, 7, 255)', tipo: "Super Rare"},
+  {cor: 'rgb(255, 18, 241)', tipo: "Epic"},
+  {cor: 'rgb(255, 194, 7)', tipo: "Legendary"},
+  {cor: 'rgb(255, 0, 84)', tipo: "Super Legendary"},
 ];
 
 const skinsImageList = [
@@ -85,6 +86,7 @@ const updateSimulator = (heroi: IHeroi) => {
   var energy = getEnergy(heroi.abilities);
   var mana = getMana(heroi.abilities);
   var skin = ''
+  var rarityCor = rarityList.find((x)=> x.tipo === heroi.rarity)?.cor
 
   if(heroi.skin == 6 || heroi.skin == 7 || heroi.skin == 8){
     skin = `/skin_${heroi.skin}.png`
@@ -150,6 +152,7 @@ const updateSimulator = (heroi: IHeroi) => {
     id: hero,
     skin,
     color,
+    rarityCor,
     customName,
     level,
     rarity,

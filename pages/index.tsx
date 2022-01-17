@@ -87,8 +87,9 @@ const Bomb = () => {
                                     <div>
                                         id: {item.id}
                                     </div>
-                                    <div>
-                                        rarity: {item.rarity}
+                                    
+                                    <div style={{ background: item.rarityCor }} >
+                                        {item.rarity}
                                     </div>
                                     <div>
                                         level: {item.level} 

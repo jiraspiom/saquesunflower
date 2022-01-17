@@ -88,7 +88,7 @@ const Bomb = () => {
                                         id: {item.id}
                                     </div>
                                     
-                                    <div >
+                                    <div>
                                         {item.rarity}
                                     </div>
                                     <div>

@@ -13,6 +13,7 @@ export interface IHeroiOB{
     bombrange: number,
     energy: number,
     mana: number,
+    abilities: [],
     timeToRecover: number,
     hitsWood: number,
     hitsMetal: number,
@@ -22,5 +23,8 @@ export interface IHeroiOB{
     totalProfit: number,
     maxProfit: number,
     minProfit: number,
-    avgProfit: number
+    avgProfit: number,
+    claimed: number,
+    taxa: number,
+    saques: number
 }

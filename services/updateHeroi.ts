@@ -85,6 +85,7 @@ const updateSimulator = (heroi: IHeroi) => {
   var bombrange = heroi.bombRange;
   var energy = getEnergy(heroi.abilities);
   var mana = getMana(heroi.abilities);
+  var abilities = heroi.abilities;
   var skin = ''
   var rarityCor = rarityList.find((x)=> x.tipo === heroi.rarity)?.cor
 
@@ -163,6 +164,7 @@ const updateSimulator = (heroi: IHeroi) => {
     bombrange,
     energy,
     mana,
+    abilities,
     timeToRecover,
     hitsWood: Math.floor(hitsWood),
     hitsMetal: Math.floor(hitsMetal),

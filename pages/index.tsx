@@ -146,7 +146,7 @@ const Bomb = () => {
                             <div>Max profit: {item.maxProfit}</div>
                             <div>Min profit: {item.minProfit}</div>
                             <div>Avg profit: {item.avgProfit}</div>
-                            <div>Total profit: {item.totalProfit}</div>
+                            {/* <div>Total profit: {item.totalProfit}</div> */}
                         </div>
                     )}
                 </div>
@@ -174,15 +174,15 @@ const calcular = async (carteira: string) => {
     const saques: number = totalSaque.data.total
 
     //calulcando os bcoin e taxas
-    var amount_of_bcoin = 0
-    var amount_of_bcoin_claimed = 0
+    var bcoin = 0
+    var bcoin_claimed = 0
     for (const item of totalSaque.data.items) {
-        amount_of_bcoin = amount_of_bcoin + item.amount_of_bcoin
-        amount_of_bcoin_claimed = amount_of_bcoin_claimed + item.amount_of_bcoin_claimed
+        bcoin += item.amount_of_bcoin
+        bcoin_claimed += item.amount_of_bcoin_claimed
     }
 
-    const taxa = amount_of_bcoin - amount_of_bcoin_claimed
-    const claimed = amount_of_bcoin_claimed
+    const taxa = bcoin - bcoin_claimed
+    const claimed = bcoin_claimed
 
     const final = dados?.map((item: IHeroi) => {
         return updateSimulator(item)

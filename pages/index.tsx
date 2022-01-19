@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import gbs from '../styles/Teste.module.css'
 
 import type { NextPage } from 'next'
 import Image from 'next/image'
@@ -32,6 +33,7 @@ const Bomb = () => {
         legend: 0,
         superLegend: 0
     })
+    const [mostrar, setMostrar] = useState(false)
 
     const onSubmit = (e: FormEvent) => {
         e.preventDefault();
@@ -39,8 +41,15 @@ const Bomb = () => {
 
     const buscarHero = async () => {
         console.log("Vamos ver os herois :D")
+        setMostrar(true)
 
         const heroi: any = await calcular(carteira)
+
+        if (heroi) {
+            setMostrar(true)
+        } else {
+            setMostrar(false)
+        }
 
         setHeroi(heroi?.final)
         setMax(heroi?.max)
@@ -75,123 +84,143 @@ const Bomb = () => {
                     <input type="text" name="carteira" id="carteira" placeholder="numero da carteira"
                         onChange={(e) => { setCarteira(e.target.value) }}
                     />
-                </div>
-                <div className={styles.grid}>
-                    <div className={styles.card}>
-                        <Image onClick={buscarHero}
-                            src="/hero.png"
-                            alt="hero"
-                            width={70}
-                            height={93}
-                            quality={100}
-                        />
-                    </div>
-                    <div >
-                        <div>
-                            Total investido: {totalBcoinGasto}
-                        </div>
-                        <div>
-                            bcoin ganho: {claimed}
-                        </div>
-                        <div>
-                            taxa paga: {taxa}
-                        </div>
-                        <div>
-                            total de saque: {saques}
-                        </div>
-                    </div>
-
-                    <div className={styles.card}>
-                        <div>
-                            herois: {heroi?.length}
-                        </div>
-                        <div>
-                            common: {quantidadePorRaridade.common}
-                        </div>
-                        <div>
-                            rare: {quantidadePorRaridade.rare}
-                        </div>
-                        <div>
-                            super rare: {quantidadePorRaridade.superRare}
-                        </div>
-                        <div>
-                            epic: {quantidadePorRaridade.epic}
-                        </div>
-                        <div>
-                            legend: {quantidadePorRaridade.legend}
-                        </div>
-                        <div>
-                            super legend: {quantidadePorRaridade.superLegend}
-                        </div>
-                    </div>
+                    <button onClick={buscarHero}>buscar</button>
 
                 </div>
 
-                herois: {heroi?.length}
+                {mostrar ?
+                    <div>
 
-                <div>
-                    <li>
-                        Max: {max} bcoin day
-                    </li>
-                    <li>
-                        Avg: {avg} bcoin day
-                    </li>
-                    <li>
-                        Min: {min} bcoin day
-                    </li>
-                </div>
-                <div className={styles.grid}>
-                    {heroi?.map((item: IHeroiOB) =>
+                        <div className={styles.grid}>
+                            {/* <div className={styles.card}>
+                                <Image onClick={buscarHero}
+                                src="/hero.png"
+                                alt="hero"
+                                width={70}
+                                height={93}
+                                quality={100}/>
+                            </div> */}
 
-                        <div key={item.id} className={styles.card}>
-
-                            <div className={styles.grid}>
-                                <div style={{ background: item.rarityCor }}><Image src={item.skin} alt={item.skin} width={64} height={64} quality={100} /> </div>
-
-                                <div className={styles.espaco}>
-                                    <div>
-                                        id: {item.id}
-                                    </div>
-
-                                    <div >
-                                        {item.rarity}
-                                    </div>
-                                    <div>
-                                        level: {item.level}
-                                    </div>
+                            <div className={styles.card} >
+                                <div>
+                                    Total investido: {totalBcoinGasto}
+                                </div>
+                                <div>
+                                    bcoin ganho: {claimed}
+                                </div>
+                                <div>
+                                    taxa paga: {taxa}
+                                </div>
+                                <div>
+                                    total de saque: {saques}
                                 </div>
                             </div>
 
-                            <div>
-                                <div className={styles.tela}>
-                                    <Image src="/power.png" alt="power" width={32} height={32} quality={100} /> Power: {item.power}
+                            <div className={styles.card}>
+                                HEROIS: {heroi?.length}
+                                <li>
+                                    Max: {max} bcoin day
+                                </li>
+                                <li>
+                                    Avg: {avg} bcoin day
+                                </li>
+                                <li>
+                                    Min: {min} bcoin day
+                                </li>
+                            </div>
+
+                            <div className={styles.card}>
+                                <div>
+                                    common: {quantidadePorRaridade.common}
                                 </div>
                                 <div>
-                                    <Image src="/speed.png" alt="speed" width={32} height={32} quality={100} />  Speed: {item.speed}
+                                    rare: {quantidadePorRaridade.rare}
                                 </div>
                                 <div>
-                                    <Image src="/stamina.png" alt="stamina" width={32} height={32} quality={100} /> Stamina: {item.stamina}
+                                    super rare: {quantidadePorRaridade.superRare}
                                 </div>
                                 <div>
-                                    <Image src="/bomb.png" alt="bomb" width={32} height={32} quality={100} /> Bomb num: {item.bombnum}
+                                    epic: {quantidadePorRaridade.epic}
                                 </div>
                                 <div>
-                                    <Image src="/range.png" alt="range" width={32} height={32} quality={100} /> Bomb range: {item.bombrange}
+                                    legend: {quantidadePorRaridade.legend}
+                                </div>
+                                <div>
+                                    super legend: {quantidadePorRaridade.superLegend}
                                 </div>
                             </div>
-                            <div>
-                                {item.abilities.map((item: any) =>
-                                    <Image key={item} src={'/abilities_' + item + '.png'} alt="range" width={32} height={32} quality={100} />
-                                )}
-                            </div>
-                            <hr />
-                            <div>Max profit: {item.maxProfit}</div>
-                            <div>Min profit: {item.minProfit}</div>
-                            <div>Avg profit: {item.avgProfit}</div>
-                            {/* <div>Total profit: {item.totalProfit}</div> */}
+
                         </div>
-                    )}
-                </div>
+
+                        <div className={styles.grid}>
+                            {heroi?.map((item: IHeroiOB) =>
+
+
+                                <div key={item.id} className={gbs.card}>
+
+                                    <div className={gbs.grid}>
+                                        <div className={gbs.box1}>
+                                            <div>
+                                                {item.id}
+                                            </div>
+                                            <div className={gbs.box} style={{ background: item.rarityCor }}>
+                                                <Image src={item.skin} alt={item.skin} width={64} height={64} quality={100} />
+                                            </div>
+
+                                            <div >
+                                                {item.rarity}
+                                            </div>
+                                            <div >
+                                                level: {item.level}
+                                            </div>
+                                        </div>
+
+                                        <div className={gbs.box2}>
+                                            <div>
+                                                <div className={styles.tela}>
+                                                    <Image src="/power.png" alt="power" width={32} height={32} quality={100} /> Power: {item.power}
+                                                </div>
+                                                <div>
+                                                    <Image src="/speed.png" alt="speed" width={32} height={32} quality={100} />  Speed: {item.speed}
+                                                </div>
+                                                <div>
+                                                    <Image src="/stamina.png" alt="stamina" width={32} height={32} quality={100} /> Stamina: {item.stamina}
+                                                </div>
+                                                <div>
+                                                    <Image src="/bomb.png" alt="bomb" width={32} height={32} quality={100} /> Bomb num: {item.bombnum}
+                                                </div>
+                                                <div>
+                                                    <Image src="/range.png" alt="range" width={32} height={32} quality={100} /> Bomb range: {item.bombrange}
+                                                </div>
+                                                <hr />
+                                                <div>
+                                                    {item.abilities.map((item: any) =>
+                                                        <Image key={item} src={'/abilities_' + item + '.png'} alt="range" width={32} height={32} quality={100} />
+                                                    )}
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                        <div className={gbs.box3}>
+
+                                            <div>Max profit: {item.maxProfit}</div>
+                                            <div>Min profit: {item.minProfit}</div>
+                                            <div>Avg profit: {item.avgProfit}</div>
+                                            {/* <div>Total profit: {item.totalProfit}</div> */}
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            )}
+                        </div>
+
+                    </div> : <div>...bem vindo...</div>
+
+                }
             </main>
         </div>
 

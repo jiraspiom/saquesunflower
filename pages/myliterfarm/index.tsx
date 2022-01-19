@@ -116,9 +116,11 @@ const buscarValoresApiCoinGecko = async () => {
     const sunflower = dadosSff.id
     // const sffBrl = dadosSff.market_data.current_price.brl
     // const sffUsd = dadosSff.market_data.current_price.usd
-    
-    const sffBrl = 0.720054
-    const sffUsd = 0.720054
+    //0.720054 0.525377
+    const sffBrl = 0.525377
+    const sffUsd = 0.525377
+
+
     
     
     const Dados: iDados = {
@@ -139,10 +141,10 @@ const calcular = async (taxa: number) => {
     if (taxa) {
         taxaMtic = taxa
     } else {
-        taxaMtic = 0.29
+        taxaMtic = 0.03
     }
     var taxaMtic = taxa
-    var colher = 8.8
+    var colher = 0.88
 
     const taxabrl = taxaMtic * dados.maticBrl
     const taxausd = taxaMtic * dados.maticUsd

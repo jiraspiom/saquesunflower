@@ -26,5 +26,16 @@ export interface IHeroiOB{
     avgProfit: number,
     claimed: number,
     taxa: number,
-    saques: number
+    saques: number,
+    quantidadePorRaridade: IRaridade
+    totalBcoinGasto: number
+}
+
+interface IRaridade {
+    common: number
+    epic: number
+    legend: number
+    rare: number
+    superLegend: number
+    superRare: number
 }

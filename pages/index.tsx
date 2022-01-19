@@ -10,6 +10,7 @@ import { IHeroi } from '../types/iHeroi'
 import { consultaApiHerois } from '../services/consultarApiHerois'
 import { updateSimulator } from '../services/updateHeroi'
 import totalSacado from '../services/totalSacado'
+import { quantidadeRaridade, calcularBcoin, classificacaoBomber } from '../services/calcularBcoin'
 
 const Bomb = () => {
 
@@ -22,6 +23,15 @@ const Bomb = () => {
     const [claimed, setClaimed] = useState(0)
     const [taxa, setTaxa] = useState(0)
     const [saques, setSaques] = useState(0)
+    const [totalBcoinGasto, setTotalBcoinGasto] = useState(0)
+    const [quantidadePorRaridade, setQuantidadePorRaridade] = useState({
+        common: 0,
+        rare: 0,
+        superRare: 0,
+        epic: 0,
+        legend: 0,
+        superLegend: 0
+    })
 
     const onSubmit = (e: FormEvent) => {
         e.preventDefault();
@@ -40,6 +50,9 @@ const Bomb = () => {
         setClaimed(heroi?.claimed)
         setTaxa(heroi?.taxa)
         setSaques(heroi?.saques)
+        setTotalBcoinGasto(heroi?.totalBcoinGasto)
+        setQuantidadePorRaridade({ ...heroi?.quantidadePorRaridade })
+
     }
 
     return (
@@ -74,6 +87,9 @@ const Bomb = () => {
                     </div>
                     <div >
                         <div>
+                            Total investido: {totalBcoinGasto}
+                        </div>
+                        <div>
                             bcoin ganho: {claimed}
                         </div>
                         <div>
@@ -83,6 +99,31 @@ const Bomb = () => {
                             total de saque: {saques}
                         </div>
                     </div>
+
+                    <div className={styles.card}>
+                        <div>
+                            herois: {heroi?.length}
+                        </div>
+                        <div>
+                            common: {quantidadePorRaridade.common}
+                        </div>
+                        <div>
+                            rare: {quantidadePorRaridade.rare}
+                        </div>
+                        <div>
+                            super rare: {quantidadePorRaridade.superRare}
+                        </div>
+                        <div>
+                            epic: {quantidadePorRaridade.epic}
+                        </div>
+                        <div>
+                            legend: {quantidadePorRaridade.legend}
+                        </div>
+                        <div>
+                            super legend: {quantidadePorRaridade.superLegend}
+                        </div>
+                    </div>
+
                 </div>
 
                 herois: {heroi?.length}
@@ -188,6 +229,12 @@ const calcular = async (carteira: string) => {
         return updateSimulator(item)
     })
 
+    const quantidadePorRaridade = quantidadeRaridade(dados)
+
+    //classificacaoBomber(dados)
+
+    const totalBcoinGasto = calcularBcoin(dados)
+
 
     for (const item of final) {
         max = max + item.maxProfit
@@ -204,7 +251,9 @@ const calcular = async (carteira: string) => {
         final: final,
         taxa: parseFloat(taxa.toFixed(2)),
         claimed: parseFloat(claimed.toFixed(2)),
-        saques: parseFloat(saques.toFixed(2))
+        saques: parseFloat(saques.toFixed(2)),
+        quantidadePorRaridade,
+        totalBcoinGasto
     }
 
     return calculado

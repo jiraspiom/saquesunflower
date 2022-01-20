@@ -74,13 +74,13 @@
 }
 
 .card {
+  background-color:tan;
   margin: 1rem;
   padding: 1.5rem;
   text-align: left;
   color: inherit;
   text-decoration: none;
-  border: 1px solid #eaeaea;
-  border: 1px solid #271414;
+  border: 1px solid #2c2828;
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
   max-width: 700px;
@@ -126,6 +126,36 @@
 .Comomm {
   color: white;
   background-color:red;
+}
+
+
+.linhavertical {
+  height: 68px;/*Altura da linha*/
+  border-left: 2px solid;/* Adiciona borda esquerda na div como ser fosse uma linha.*/
+}
+
+.espaco {
+  border-radius: 5px;
+  padding: 0.75rem;
+  font-size: 1.1rem;
+
+}
+
+.gbs:link, 
+.gbs:visited {
+  background-color: white;
+  color: black;
+  border: 2px solid green;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.gbs:hover, 
+.gbs:active {
+  background-color: green;
+  color: white;
 }
 
 

@@ -1,26 +1,10 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-
-type Data = {
-  id: number,
-  index: number,
-  rarity: string,
-  level: number,
-  color: number,
-  skin: number,
-  stamina: number,
-  speed: number,
-  bombSkin: number,
-  bombCount: number,
-  bombPower: number,
-  bombRange: number,
-  abilities: []
-
-}
+import { IHeroi } from '../../../types/iHeroi'
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<IHeroi>
 ) {
   const {id} = req.query
   

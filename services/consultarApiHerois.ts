@@ -14,4 +14,16 @@ const consultaApiHerois = async (carteira: string) =>{
 
 }
 
-export {consultaApiHerois}
+
+const consultaApiHerois2 = async (carteira: string) =>{
+
+  const _url = `/api/bombers/${carteira}`;
+
+  const request: any = await fetch(_url)
+  const dados: any = await request.json()
+  
+  return dados.heros
+
+}
+
+export {consultaApiHerois, consultaApiHerois2}

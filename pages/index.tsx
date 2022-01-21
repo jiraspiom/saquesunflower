@@ -77,12 +77,12 @@ const Bomb = () => {
             <main className={styles.main}>
 
                 <h1 className={styles.title}>
-                    simulator 
+                    simulator
                 </h1>
 
                 <div className={gbs.container}>
                     <div>
-                    <label>Address: </label>
+                        <label>Address: </label>
 
                     </div>
                     <div>
@@ -245,6 +245,9 @@ const calcular = async (carteira: string) => {
     if (!carteira) {
         return console.log("Ai, preencha o campo carteira")
     }
+    if (carteira.length != 42) {
+        return console.log("ops...wallet address... :(")
+    }
 
     var dados: Array<IHeroi> = await consultaApiHerois(carteira)
     //console.log(dados)
@@ -255,6 +258,11 @@ const calcular = async (carteira: string) => {
     //calulcando os bcoin e taxas
     var bcoin = 0
     var bcoin_claimed = 0
+    if (totalSaque.data.items) {
+        console.log(";)")
+    } else {
+        return
+    }
     for (const item of totalSaque.data.items) {
         bcoin += item.amount_of_bcoin
         bcoin_claimed += item.amount_of_bcoin_claimed

@@ -14,7 +14,6 @@ a {
 * {
   box-sizing: border-box;
 }
-.sombra {filter: drop-shadow(8px 8px 10px green);}
 
 .Comomm {filter: drop-shadown(8px 8px 10px rgb(215, 215, 215))}
 .Rare {filter: drop-shadown(8px 8px 10px rgb(7, 255, 36))}

@@ -51,7 +51,6 @@ const skinsImageList = [
   { id: 9, name: "??9??" },
   { id: 10, name: "??10??" },
   { id: 11, name: "??11??"},
-
 ];
 
 function getEnergy(array: any) {

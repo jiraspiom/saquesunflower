@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import gbs from '../styles/Teste.module.css'
+import global from '../styles/Teste.module.css'
 
 import type { NextPage } from 'next'
 import Image from 'next/image'
@@ -76,16 +77,23 @@ const Bomb = () => {
             <main className={styles.main}>
 
                 <h1 className={styles.title}>
-                    simulator
+                    simulator 
                 </h1>
 
-                <div className={styles.description}>
-                    <label htmlFor="carteira">carteira: </label>
-                    <input type="text" name="carteira" id="carteira" placeholder="numero da carteira"
-                        onChange={(e) => { setCarteira(e.target.value) }}
-                    />
-                    <button onClick={buscarHero}>buscar</button>
+                <div className={gbs.container}>
+                    <div>
+                    <label>Address: </label>
 
+                    </div>
+                    <div>
+                        <input type="text" name="carteira" id="carteira" className={gbs.text} placeholder="ex: 0x12345abcdef..."
+                            onChange={(e) => { setCarteira(e.target.value) }}
+                        />
+                    </div>
+                    <div>
+                        <button onClick={buscarHero} className={gbs.button}>search</button>
+                        {/* <input type="submit" value="search" className={gbs.button}/> */}
+                    </div>
                 </div>
 
                 {mostrar ?
@@ -103,16 +111,16 @@ const Bomb = () => {
 
                             <div className={styles.card} >
                                 <div>
-                                    Total investido: {totalBcoinGasto}
+                                    Invested: {totalBcoinGasto}
                                 </div>
                                 <div>
-                                    bcoin ganho: {claimed}
+                                    bcoin claimed: {claimed}
                                 </div>
                                 <div>
-                                    taxa paga: {taxa}
+                                    tax: {taxa}
                                 </div>
                                 <div>
-                                    total de saque: {saques}
+                                    total withdrawal: {saques}
                                 </div>
                             </div>
 
@@ -167,10 +175,10 @@ const Bomb = () => {
                                                 <Image src={item.skin} alt={item.skin} width={64} height={64} quality={100} />
                                             </div>
 
-                                            <div >
+                                            <div>
                                                 {item.rarity}
                                             </div>
-                                            <div >
+                                            <div>
                                                 level: {item.level}
                                             </div>
                                         </div>
@@ -204,10 +212,10 @@ const Bomb = () => {
                                         </div>
 
                                         <div className={gbs.box3}>
-
-                                            <div>Max profit: {item.maxProfit}</div>
-                                            <div>Min profit: {item.minProfit}</div>
-                                            <div>Avg profit: {item.avgProfit}</div>
+                                            <div>bcoin profit</div>
+                                            <div>Max: {item.maxProfit}</div>
+                                            <div>Avg: {item.avgProfit}</div>
+                                            <div>Min: {item.minProfit}</div>
                                             {/* <div>Total profit: {item.totalProfit}</div> */}
                                         </div>
 
@@ -218,7 +226,7 @@ const Bomb = () => {
                             )}
                         </div>
 
-                    </div> : <div>...bem vindo...</div>
+                    </div> : <div>...welcome...</div>
 
                 }
             </main>

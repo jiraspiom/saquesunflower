@@ -25,6 +25,6 @@ const consultaApiHerois = async (carteira: any) =>{
   const request: any = await fetch(_url, _options)
   const dados: any = await request.json()
   
-  return dados.heros
+  return dados
 
 }

@@ -20,7 +20,7 @@
 .grid {
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
-  grid-template-rows: 135px 120px ;
+  grid-template-rows: 150px 120px ;
   grid-gap: 5px;
   padding: 20px;
 }
@@ -80,3 +80,11 @@
 }
 
 .sombra {filter: drop-shadow(8px 8px 10px green);}
+
+.skill {
+  display: grid;
+  grid-template-columns: 0.25fr 0.25fr 0.25fr ;
+  justify-content: center;
+  grid-gap: 5px;
+  
+}

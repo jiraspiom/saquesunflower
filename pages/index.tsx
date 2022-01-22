@@ -174,12 +174,13 @@ const Bomb = () => {
                                             <div className={gbs.box} style={{ background: item.rarityCor }}>
                                                 <Image src={item.skin} alt={item.skin} width={64} height={64} quality={100} />
                                             </div>
+                                            
+                                            <div>
+                                                level: {item.level}
+                                            </div>
 
                                             <div>
                                                 {item.rarity}
-                                            </div>
-                                            <div>
-                                                level: {item.level}
                                             </div>
                                         </div>
 
@@ -200,13 +201,15 @@ const Bomb = () => {
                                                 <div>
                                                     <Image src="/range.png" alt="range" width={32} height={32} quality={100} /> Bomb range: {item.bombrange}
                                                 </div>
-                                                <hr />
-                                                <div>
+
+                                            </div>
+
+                                            <hr />
+                                                <div className={gbs.skill}>
                                                     {item.abilities.map((item: any) =>
                                                         <Image key={item} src={'/abilities_' + item + '.png'} alt="range" width={32} height={32} quality={100} />
                                                     )}
                                                 </div>
-                                            </div>
 
 
                                         </div>

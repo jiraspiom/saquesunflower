@@ -258,7 +258,7 @@ const calcular = async (carteira: string) => {
     var totalSaque: any = await totalSacado(carteira)
     const saques: number = totalSaque.data.total
 
-    console.log(totalSaque);
+    //console.log(totalSaque);
     //calulcando os bcoin e taxas
     var bcoin = 0
     var bcoin_claimed = 0

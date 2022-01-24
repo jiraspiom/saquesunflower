@@ -15,7 +15,6 @@ const consultaApiHerois2 = async (carteira: string) =>{
   return dados.heros
 
 }
-``
 
 const consultaApiHerois = async (carteira: string) =>{
 
@@ -23,7 +22,7 @@ const consultaApiHerois = async (carteira: string) =>{
 
   const request: any = await fetch(_url)
   const dados: any = await request.json()
-  
+ 
   return dados.heros
 
 }

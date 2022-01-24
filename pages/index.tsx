@@ -258,21 +258,25 @@ const calcular = async (carteira: string) => {
     var totalSaque: any = await totalSacado(carteira)
     const saques: number = totalSaque.data.total
 
+    console.log(totalSaque);
     //calulcando os bcoin e taxas
     var bcoin = 0
     var bcoin_claimed = 0
+    var taxa = 0
+    var claimed = 0
+
     if (totalSaque.data.items) {
         console.log(";)")
-    } else {
-        return
-    }
-    for (const item of totalSaque.data.items) {
-        bcoin += item.amount_of_bcoin
-        bcoin_claimed += item.amount_of_bcoin_claimed
-    }
 
-    const taxa = bcoin - bcoin_claimed
-    const claimed = bcoin_claimed
+        for (const item of totalSaque.data.items) {
+            bcoin += item.amount_of_bcoin
+            bcoin_claimed += item.amount_of_bcoin_claimed
+        }
+    
+        taxa = bcoin - bcoin_claimed
+        claimed = bcoin_claimed
+
+    } 
 
     const final = dados?.map((item: IHeroi) => {
         return updateSimulator(item)

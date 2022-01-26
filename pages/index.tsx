@@ -35,6 +35,13 @@ const Bomb = () => {
         legend: 0,
         superLegend: 0
     })
+
+    const[bhouse, setBhouse] = useState({
+        tokenID: '',
+        tokenName: '',
+        value: ''
+    })
+
     const [mostrar, setMostrar] = useState(false)
 
     const onSubmit = (e: FormEvent) => {
@@ -44,8 +51,8 @@ const Bomb = () => {
     const buscarHero = async () => {
         console.log("Vamos ver os herois :D")
 
-        bHouse(carteira)
-
+        const objCasa = await bHouse(carteira)
+        
         setMostrar(true)
 
         const heroi: any = await calcular(carteira)
@@ -66,6 +73,8 @@ const Bomb = () => {
         setSaques(heroi?.saques)
         setTotalBcoinGasto(heroi?.totalBcoinGasto)
         setQuantidadePorRaridade({ ...heroi?.quantidadePorRaridade })
+
+       // setBhouse({...objCasa})
 
     }
 
@@ -115,7 +124,10 @@ const Bomb = () => {
 
                             <div className={styles.card} >
                                 <div>
-                                    Invested: {totalBcoinGasto}
+                                    {bhouse.tokenName}: {bhouse.value}
+                                </div>
+                                <div>
+                                    Invested bombers: {totalBcoinGasto}
                                 </div>
                                 <div>
                                     bcoin claimed: {claimed}
@@ -126,10 +138,13 @@ const Bomb = () => {
                                 <div>
                                     total withdrawal: {saques}
                                 </div>
+                                <div>
+                                    TOTAL INVESTED: {parseFloat(bhouse.value) + totalBcoinGasto}
+                                </div>
                             </div>
 
                             <div className={styles.card}>
-                                HEROIS: {heroi?.length}
+                                HEROIS: {heroi?.length} 
                                 <li>
                                     Max: {max} bcoin day
                                 </li>

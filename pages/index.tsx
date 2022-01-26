@@ -13,6 +13,7 @@ import { consultaApiHerois } from '../services/consultarApiHerois'
 import { updateSimulator } from '../services/updateHeroi'
 import totalSacado from '../services/totalSacado'
 import { quantidadeRaridade, calcularBcoin, classificacaoBomber } from '../services/calcularBcoin'
+import bHouse from '../services/bhouse'
 
 const Bomb = () => {
 
@@ -42,6 +43,9 @@ const Bomb = () => {
 
     const buscarHero = async () => {
         console.log("Vamos ver os herois :D")
+
+        bHouse(carteira)
+
         setMostrar(true)
 
         const heroi: any = await calcular(carteira)

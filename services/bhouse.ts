@@ -16,16 +16,17 @@ const bHouse = async (address: string)=>{
     const api = await resApi.json()
 
     if(api.result[0]){
-        console.log('tem casa');
+        console.log('has house');
     }else{
+        console.log('not house');
         return;
     }
 
     const txhash = api.result[0].hash
     tokenID = api.result[0].tokenID
     tokenName = api.result[0].tokenName
-
-    const value = await transaction(txhash, apikey)
+    const from = api.result[0].from
+    const value = await transaction(txhash, apikey, from)
     
     return {
         tokenID,
@@ -37,17 +38,23 @@ const bHouse = async (address: string)=>{
 
 export default bHouse
 
-const transaction = async (txhash: string, apikey: string) =>{
+const transaction = async (txhash: string, apikey: string, from: string) =>{
     const bsc = 'https://bsc-dataseed.binance.org/'
     const web3 = new Web3(bsc)
 
     const dados = await web3.eth.getTransactionReceipt(txhash)
     .then((valor)=>{
-        return web3.utils.fromWei(valor.logs[0].data, 'ether')
+        if (from == "0x0000000000000000000000000000000000000000"){
+            console.log('house is mint...');
+            return web3.utils.fromWei(valor.logs[0].data, 'ether')
+        }else{
+            console.log('house is buy...');
+            const v1 = web3.utils.fromWei(valor.logs[0].data, 'ether')
+            const v2 = web3.utils.fromWei(valor.logs[2].data, 'ether')
+            return String(parseFloat(v1) + parseFloat(v2))
+        }
     });
-
     return dados
-    
 }
 
 const novo =  async (txhash: string, apikey: string)=>{

@@ -36,7 +36,7 @@ const Bomb = () => {
         superLegend: 0
     })
 
-    const[bhouse, setBhouse] = useState({
+    const [house, setHouse] = useState({
         tokenID: '',
         tokenName: '',
         value: ''
@@ -44,9 +44,9 @@ const Bomb = () => {
 
     const [mostrar, setMostrar] = useState(false)
 
-    const onSubmit = (e: FormEvent) => {
-        e.preventDefault();
-    }
+    // const onSubmit = (e: FormEvent) => {
+    //     e.preventDefault();
+    // }
 
     const buscarHero = async () => {
         console.log("Vamos ver os herois :D")
@@ -55,26 +55,26 @@ const Bomb = () => {
         
         setMostrar(true)
 
-        const heroi: any = await calcular(carteira)
+        const heroio: any = await calcular(carteira)
 
-        if (heroi) {
+        if (heroio) {
             setMostrar(true)
         } else {
             setMostrar(false)
         }
 
-        setHeroi(heroi?.final)
-        setMax(heroi?.max)
-        setAvg(heroi?.avg)
-        setMin(heroi?.min)
+        setHeroi(heroio?.final)
+        setMax(heroio?.max)
+        setAvg(heroio?.avg)
+        setMin(heroio?.min)
 
-        setClaimed(heroi?.claimed)
-        setTaxa(heroi?.taxa)
-        setSaques(heroi?.saques)
-        setTotalBcoinGasto(heroi?.totalBcoinGasto)
-        setQuantidadePorRaridade({ ...heroi?.quantidadePorRaridade })
+        setClaimed(heroio?.claimed)
+        setTaxa(heroio?.taxa)
+        setSaques(heroio?.saques)
+        setTotalBcoinGasto(heroio?.totalBcoinGasto)
+        setQuantidadePorRaridade({ ...heroio?.quantidadePorRaridade })
 
-       // setBhouse({...objCasa})
+        setHouse({tokenID: String(objCasa?.tokenID), tokenName: String(objCasa?.tokenName), value: String(objCasa?.value)})
 
     }
 
@@ -124,7 +124,7 @@ const Bomb = () => {
 
                             <div className={styles.card} >
                                 <div>
-                                    {bhouse.tokenName}: {bhouse.value}
+                                    {house.tokenName}: {house.value}
                                 </div>
                                 <div>
                                     Invested bombers: {totalBcoinGasto}
@@ -139,7 +139,7 @@ const Bomb = () => {
                                     total withdrawal: {saques}
                                 </div>
                                 <div>
-                                    TOTAL INVESTED: {parseFloat(bhouse.value) + totalBcoinGasto}
+                                    TOTAL INVESTED: {parseFloat(house.value) + totalBcoinGasto}
                                 </div>
                             </div>
 

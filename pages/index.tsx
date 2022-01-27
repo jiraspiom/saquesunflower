@@ -51,14 +51,14 @@ const Bomb = () => {
     const buscarHero = async () => {
         console.log("Vamos ver os herois :D")
 
-        const objCasa = await bHouse(carteira)
-        
         setMostrar(true)
 
         const heroio: any = await calcular(carteira)
+        var objCasa: any
 
         if (heroio) {
             setMostrar(true)
+            objCasa = await bHouse(carteira)
         } else {
             setMostrar(false)
         }
@@ -124,7 +124,7 @@ const Bomb = () => {
 
                             <div className={styles.card} >
                                 <div>
-                                    {house.tokenName}: {house.value}
+                                    House: {house?.value == '0' ? 'no': house?.value}
                                 </div>
                                 <div>
                                     Invested bombers: {totalBcoinGasto}
@@ -139,7 +139,8 @@ const Bomb = () => {
                                     total withdrawal: {saques}
                                 </div>
                                 <div>
-                                    TOTAL INVESTED: {parseFloat(house.value) + totalBcoinGasto}
+                                    TOTAL INVESTED: {house?.value == '0' ? totalBcoinGasto: parseFloat(house?.value) + totalBcoinGasto}
+                                    
                                 </div>
                             </div>
 

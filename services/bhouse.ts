@@ -11,23 +11,25 @@ const bHouse = async (address: string)=>{
 
     var tokenID = ''
     var tokenName = ''
+    var value = ''
 
     const resApi = await fetch(urlApi)
     const api = await resApi.json()
 
     if(api.result[0]){
         console.log('has house');
+
+        tokenID = api.result[0].tokenID
+        tokenName = api.result[0].tokenName
+        value = await transaction(api.result[0].hash, apikey, api.result[0].from)
+        
     }else{
         console.log('not house');
-        return;
+        tokenID = ''
+        tokenName = ''
+        value = '0'
     }
 
-    const txhash = api.result[0].hash
-    tokenID = api.result[0].tokenID
-    tokenName = api.result[0].tokenName
-    const from = api.result[0].from
-    const value = await transaction(txhash, apikey, from)
-    
     return {
         tokenID,
         tokenName,
